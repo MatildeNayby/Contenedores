@@ -18,11 +18,14 @@ async function init() {
 
         // Configurar la cámara
         console.log("Inicializando la cámara...");
-        webcam = new tmImage.Webcam(400, 300, true); // Tamaño ajustado al estilo CSS
+        webcam = new tmImage.Webcam(400, 400, true); // Ajusta el tamaño de la webcam
         await webcam.setup();
-        await webcam.play();
 
-        // Ajustar el tamaño del canvas directamente
+        // Reproducir el video
+        await webcam.play();
+        console.log("Cámara inicializada correctamente");
+
+        // Agregar el canvas al contenedor
         const webcamContainer = document.getElementById("webcam-container");
         if (webcamContainer) {
             webcamContainer.appendChild(webcam.canvas);
@@ -30,6 +33,10 @@ async function init() {
             console.error("El contenedor #webcam-container no se encuentra en el DOM.");
             return;
         }
+
+        // Ajustar el tamaño del canvas para que coincida visualmente
+        webcam.canvas.style.width = "200px";
+        webcam.canvas.style.height = "200px";
 
         // Iniciar predicciones
         console.log("Iniciando predicciones...");
@@ -74,5 +81,6 @@ async function predict() {
 
 // Iniciar la aplicación
 init();
+
 
 
