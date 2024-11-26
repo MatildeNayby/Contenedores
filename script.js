@@ -1,4 +1,4 @@
-const URL = "https://matildenayby.github.io/Contenedores/"; // Asegúrate de que el modelo esté en el mismo directorio
+const URL = "https://matildenayby.github.io/Contenedores/";
 
 let model, webcam;
 
@@ -6,7 +6,7 @@ async function init() {
     try {
         console.log("Iniciando la aplicación...");
 
-        // Verifica que tmImage esté disponible
+        // Verificar si la biblioteca tmImage está disponible
         if (typeof tmImage === "undefined") {
             throw new Error("Teachable Machine no está cargado correctamente");
         }
@@ -18,7 +18,7 @@ async function init() {
 
         // Configurar la cámara
         console.log("Inicializando la cámara...");
-        webcam = new tmImage.Webcam(400, 300, true); // Ajusta el ancho y alto
+        webcam = new tmImage.Webcam(400, 300, true); // Ajusta el tamaño
         await webcam.setup();
         await webcam.play();
 
