@@ -1,4 +1,4 @@
-const URL = "https://matildenayby.github.io/Contenedores/";
+model = await tmImage.load(`${"https://matildenayby.github.io/Contenedores/";}model.json`, `${"https://matildenayby.github.io/Contenedores/";}metadata.json`)
 let model, webcam;
 
 async function init() {
