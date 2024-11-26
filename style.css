@@ -3,46 +3,38 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9; /* Fondo claro para mayor legibilidad */
-    color: #333;
-}
-
-h1 {
-    color: #444;
-    margin-top: 20px;
-    font-size: 2rem;
+    background-color: #f9f9f9;
 }
 
 #webcam-container {
+    margin: 20px auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px auto;
-    width: 400px; /* Asegúrate de que coincida con la resolución del video */
-    height: 300px;
+    width: 400px; /* Ajusta el ancho del contenedor para que coincida con el canvas */
+    height: 300px; /* Ajusta el alto del contenedor para que coincida con el canvas */
     border: 2px solid #000;
     border-radius: 10px;
-    background-color: #fff; /* Fondo blanco para contraste */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #fff; /* Fondo blanco para que el canvas sea más visible */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#webcam-container canvas {
-    width: 100%; /* Ajusta el canvas para llenar el contenedor */
-    height: 100%; /* Asegura proporciones correctas */
-    border-radius: 10px; /* Coincide con el contenedor */
-    border: none; /* Opcional: elimina el borde del canvas */
+h1 {
+    color: #333;
+    margin-top: 20px;
 }
 
 #output {
-    margin: 20px auto;
-    font-size: 1rem;
-    line-height: 1.5;
-    max-width: 400px;
+    margin-top: 20px;
+    font-size: 16px;
     color: #555;
+    background: #eee;
     padding: 10px;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    display: inline-block;
 }
 
+#webcam-container canvas {
+    border: 2px solid black;
+    border-radius: 8px; /* Bordes redondeados para el canvas */
+}
