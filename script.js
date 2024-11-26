@@ -18,25 +18,21 @@ async function init() {
 
         // Configurar la cámara
         console.log("Inicializando la cámara...");
-        webcam = new tmImage.Webcam(400, 400, true); // Ajusta el tamaño de la webcam
+        webcam = new tmImage.Webcam(400, 300, true); // Ajusta el ancho y alto
         await webcam.setup();
-
-        // Reproducir el video
         await webcam.play();
-        console.log("Cámara inicializada correctamente");
 
-        // Agregar el canvas al contenedor
+        // Enlazar el flujo de video al canvas
         const webcamContainer = document.getElementById("webcam-container");
         if (webcamContainer) {
+            // Asegúrate de que el canvas esté vinculado al video
+            webcamContainer.innerHTML = "";
             webcamContainer.appendChild(webcam.canvas);
+            console.log("Canvas añadido al contenedor.");
         } else {
             console.error("El contenedor #webcam-container no se encuentra en el DOM.");
             return;
         }
-
-        // Ajustar el tamaño del canvas para que coincida visualmente
-        webcam.canvas.style.width = "200px";
-        webcam.canvas.style.height = "200px";
 
         // Iniciar predicciones
         console.log("Iniciando predicciones...");
@@ -81,6 +77,5 @@ async function predict() {
 
 // Iniciar la aplicación
 init();
-
 
 
