@@ -18,7 +18,7 @@ async function init() {
 
         // Configurar la cámara
         console.log("Inicializando la cámara...");
-        webcam = new tmImage.Webcam(400, 300, true); // Ajusta el ancho y alto
+        webcam = new tmImage.Webcam(200, 200, true); // Tamaño ajustado al estilo CSS
         await webcam.setup();
         await webcam.play();
 
