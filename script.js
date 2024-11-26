@@ -3,12 +3,7 @@ const URL = "https://matildenayby.github.io/Contenedores/"; // Asegúrate de que
 
 let model, webcam;
 
-async function init() {
-    try {
-        // Verifica que tmImage esté disponible
-        if (typeof tmImage === "undefined") {
-            throw new Error("Teachable Machine no está cargado correctamente");
-        }
+
 
         // Cargar el modelo
         model = await tmImage.load(`${URL}model.json`, `${URL}metadata.json`);
