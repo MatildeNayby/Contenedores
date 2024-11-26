@@ -14,21 +14,44 @@
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.3/dist/teachablemachine-image.min.js"></script>
 
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
         #webcam-container {
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: 20px auto;
+            width: 400px; /* Ajusta el ancho */
+            height: 300px; /* Ajusta el alto */
+            border: 2px solid #000;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
             margin-top: 20px;
         }
 
         #output {
             margin-top: 20px;
             font-size: 16px;
-            color: #333;
+            color: #555;
+            background: #eee;
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
         }
 
         canvas {
-            border: 2px solid red; /* Para hacer el canvas más visible */
+            border: 2px solid red; /* Hace el canvas más visible */
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -40,4 +63,3 @@
     <script src="script.js" defer></script>
 </body>
 </html>
-
