@@ -1,28 +1,72 @@
+/* /css/style.css */
+
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
-}
-
-#webcam-container {
-    margin: 20px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 400px; /* Ajusta el ancho del contenedor para que coincida con el canvas */
-    height: 300px; /* Ajusta el alto del contenedor para que coincida con el canvas */
-    border-radius: 10px;
-    background-color: #fff; /* Fondo blanco para que el canvas sea más visible */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
     color: #333;
-    margin-top: 20px;
 }
 
-#webcam-container canvas {
-    border-radius: 8px; /* Bordes redondeados para el canvas */
+.login-container, .admin-container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.login-container h2, .admin-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[type="text"], input[type="password"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.overview {
+    padding: 10px;
+    background-color: #e9e9e9;
+    border-radius: 5px;
+    margin-top: 20px;
 }
