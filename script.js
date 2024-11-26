@@ -39,6 +39,8 @@ async function init() {
         const webcamElement = document.getElementById("webcam-container");
         if (webcam.canvas) {
             webcamElement.appendChild(webcam.canvas);
+            webcamElement.style.width = `${webcam.canvas.width}px`;
+            webcamElement.style.height = `${webcam.canvas.height}px`;
         } else {
             console.error("El canvas de la webcam no está disponible.");
         }
@@ -78,7 +80,7 @@ async function loop() {
             });
 
             // Mostrar la clase y la probabilidad de la predicción más alta
-            predictionElement.innerHTML = `Predicción: ${highestPrediction.className} con probabilidad: ${highestPrediction.probability.toFixed(2)}`;
+            predictionElement.innerHTML = `Predicción: ${highestPrediction.className} con probabilidad: ${highestPrediction.probability.toFixed(2) * 100}%`;
         } else {
             predictionElement.innerHTML = "Predicción: Ninguna";
         }
@@ -92,5 +94,4 @@ async function loop() {
 
 
 init();
-
 
