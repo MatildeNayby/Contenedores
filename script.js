@@ -18,11 +18,11 @@ async function init() {
 
         // Configurar la cámara
         console.log("Inicializando la cámara...");
-        webcam = new tmImage.Webcam(200, 200, true); // Ancho, alto, cámara frontal
+        webcam = new tmImage.Webcam(400, 300, true); // Ajusta el ancho y alto
         await webcam.setup();
-
-        // Reproducir la cámara y agregar el canvas al DOM
         await webcam.play();
+
+        // Agregar el canvas al contenedor
         const webcamContainer = document.getElementById("webcam-container");
         if (webcamContainer) {
             webcamContainer.appendChild(webcam.canvas);
@@ -74,5 +74,6 @@ async function predict() {
 
 // Iniciar la aplicación
 init();
+
 
 
