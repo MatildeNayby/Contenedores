@@ -1,4 +1,4 @@
-const URL = "path/to/your/model/";
+const URL = "https://matildenayby.github.io/Contenedores/";
 let model, webcam;
 
 async function init() {
