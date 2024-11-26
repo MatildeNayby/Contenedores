@@ -6,9 +6,10 @@ self.addEventListener('install', (event) => {
                 './index.html',
                 './script.js',
                 './style.css',
-                './model/model.json',
-                './model/metadata.json',
-                './model/weights.bin',
+                './model.json',
+                './metadata.json',
+                './weights.bin',
+                './icon.png',
             ]);
         })
     );
@@ -21,3 +22,4 @@ self.addEventListener('fetch', (event) => {
         })
     );
 });
+
