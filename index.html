@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="icon.png">
     <title>Teachable Machine App</title>
+
+    <!-- TensorFlow.js -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image"></script>
+
+    <!-- Teachable Machine Image Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.2"></script>
 </head>
 <body>
     <h1>Teachable Machine App</h1>
-    <video id="webcam" autoplay></video>
+    <div id="webcam-container">
+        <video id="webcam" autoplay></video>
+    </div>
     <div id="output"></div>
+
+    <!-- Tu archivo de script -->
     <script src="script.js" defer></script>
 </body>
 </html>
