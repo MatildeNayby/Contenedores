@@ -22,19 +22,57 @@ async function init() {
         await webcam.setup();
         await webcam.play();
 
-setTimeout(() => {
-    const webcamElement = document.getElementById("webcam");
-    if (webcam.canvas) {
-        webcamElement.appendChild(webcam.canvas);
+        // Añadir el canvas de la cámara al contenedor
+        const webcamContainer = document.getElementById("webcam-container");
+        if (webcamContainer && webcam.canvas) {
+            webcamContainer.appendChild(webcam.canvas);
+            console.log("Canvas de la cámara añadido al contenedor.");
+        } else {
+            console.error("El contenedor o el canvas de la webcam no están disponibles.");
+            return;
+        }
 
-        // Asegúrate de que la cámara esté capturando imágenes cada segundo
-        setInterval(() => {
-            console.log("Capturando imagen...");
-            webcam.update(); // Actualiza el contenido del canvas
-        }, 1000);
-    } else {
-        console.error("El canvas de la webcam no está disponible.");
+        // Iniciar predicciones
+        console.log("Iniciando predicciones...");
+        predict();
+    } catch (error) {
+        console.error("Error durante la inicialización:", error);
+
+        // Mostrar mensaje de error en la página
+        const output = document.getElementById("output");
+        if (output) {
+            output.innerHTML = `<p style="color: red;">Error durante la inicialización: ${error.message}</p>`;
+        }
     }
-}, 1000);
+}
 
+async function predict() {
+    try {
+        // Realizar predicciones
+        const prediction = await model.predict(webcam.canvas);
+        console.log("Predicción:", prediction);
+
+        // Mostrar resultados en la página
+        const output = document.getElementById("output");
+        if (output) {
+            output.innerHTML = prediction
+                .map(p => `<strong>${p.className}:</strong> ${(p.probability * 100).toFixed(2)}%`)
+                .join("<br>");
+        }
+
+        // Continuar prediciendo en cada cuadro
+        requestAnimationFrame(predict);
+    } catch (error) {
+        console.error("Error durante la predicción:", error);
+
+        // Mostrar mensaje de error en la página
+        const output = document.getElementById("output");
+        if (output) {
+            output.innerHTML = `<p style="color: red;">Error durante la predicción: ${error.message}</p>`;
+        }
+    }
+}
+
+// Iniciar la aplicación
+init();
 
