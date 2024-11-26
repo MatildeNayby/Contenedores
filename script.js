@@ -1,10 +1,11 @@
-const URL = "https://matildenayby.github.io/Contenedores/";
+
+const URL = "https://matildenayby.github.io/Contenedores/"; // Asegúrate de que el modelo esté en el mismo directorio
 
 let model, webcam;
 
 async function init() {
     try {
-        // Asegúrate de que el objeto `tmImage` esté cargado
+        // Verifica que tmImage esté disponible
         if (typeof tmImage === "undefined") {
             throw new Error("Teachable Machine no está cargado correctamente");
         }
