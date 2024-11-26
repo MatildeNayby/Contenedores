@@ -1,78 +1,96 @@
-const URL = "https://matildenayby.github.io/Contenedores/";
+ const URL = "https://matildenayby.github.io/Contenedores/"; // Asegúrate de que el modelo esté en el mismo directorio
 
 let model, webcam;
 
 async function init() {
     try {
-        console.log("Iniciando la aplicación...");
-
-        // Verificar si la biblioteca `tmImage` está disponible
+        // Verifica que tmImage esté disponible
         if (typeof tmImage === "undefined") {
             throw new Error("Teachable Machine no está cargado correctamente");
         }
 
+        // Solicitar permiso para acceder a la cámara
+        await askForCameraPermission();
+
         // Cargar el modelo
-        console.log("Cargando modelo desde:", URL);
         model = await tmImage.load(`${URL}model.json`, `${URL}metadata.json`);
-        console.log("Modelo cargado correctamente");
 
         // Configurar la cámara
-        console.log("Inicializando la cámara...");
-        webcam = new tmImage.Webcam(400, 300, true); // Ajusta el ancho y alto
+        webcam = new tmImage.Webcam(200, 200, true); // Ancho, alto, cámara frontal
         await webcam.setup();
         await webcam.play();
 
-        // Añadir el canvas de la cámara al contenedor
-        const webcamContainer = document.getElementById("webcam-container");
-        if (webcamContainer && webcam.canvas) {
-            webcamContainer.appendChild(webcam.canvas);
-            console.log("Canvas de la cámara añadido al contenedor.");
+        setTimeout(() => {
+            const webcamElement = document.getElementById("output");
+            if (webcam.canvas) {
+                webcamElement.appendChild(webcam.canvas);
+        
+                // Asegúrate de que la cámara esté capturando imágenes cada segundo
+                setInterval(() => {
+                    console.log("Capturando imagen...");
+                    webcam.update(); // Actualiza el contenido del canvas
+                }, 1000);
+            } else {
+                console.error("El canvas de la webcam no está disponible.");
+            }
+        }, 1000);
+
+        // Mostrar el video en el DOM
+        const webcamElement = document.getElementById("webcam");
+        if (webcam.canvas) {
+            webcam.canvas.style.border = "2px solid red";
+            webcamElement.appendChild(webcam.canvas);
         } else {
-            console.error("El contenedor o el canvas de la webcam no están disponibles.");
-            return;
+            console.error("El canvas de la webcam no está disponible.");
         }
 
         // Iniciar predicciones
-        console.log("Iniciando predicciones...");
-        predict();
+        loop();
     } catch (error) {
         console.error("Error durante la inicialización:", error);
-
-        // Mostrar mensaje de error en la página
-        const output = document.getElementById("output");
-        if (output) {
-            output.innerHTML = `<p style="color: red;">Error durante la inicialización: ${error.message}</p>`;
-        }
     }
 }
 
-async function predict() {
+// Función para pedir permiso al usuario
+async function askForCameraPermission() {
     try {
-        // Realizar predicciones
-        const prediction = await model.predict(webcam.canvas);
-        console.log("Predicción:", prediction);
+        // Solicitar acceso a la cámara
+        await navigator.mediaDevices.getUserMedia({ video: true });
+    } catch (error) {
+        // Si se deniega el permiso o hay un error
+        throw new Error("No se pudo acceder a la cámara");
+    }
+}
 
-        // Mostrar resultados en la página
-        const output = document.getElementById("output");
-        if (output) {
-            output.innerHTML = prediction
-                .map(p => `<strong>${p.className}:</strong> ${(p.probability * 100).toFixed(2)}%`)
-                .join("<br>");
+// Función para actualizar la predicción y mostrarla en la página
+async function loop() {
+    try {
+        // Realiza la predicción
+        const prediction = await model.predict(webcam.canvas);
+        
+        // Aquí se muestra la predicción en el HTML
+        const predictionElement = document.getElementById("prediction");
+
+        // Si no se recibe ninguna predicción, mostramos un mensaje genérico
+        if (prediction && prediction.length > 0) {
+            // Encontrar la predicción con la probabilidad más alta
+            const highestPrediction = prediction.reduce((max, current) => {
+                return current.probability > max.probability ? current : max;
+            });
+
+            // Mostrar la clase y la probabilidad de la predicción más alta
+            predictionElement.innerHTML = `Predicción: ${highestPrediction.className} con probabilidad: ${highestPrediction.probability.toFixed(2)}`;
+        } else {
+            predictionElement.innerHTML = "Predicción: Ninguna";
         }
 
-        // Continuar prediciendo en cada cuadro
-        requestAnimationFrame(predict);
+        // Llama a la función loop para la siguiente predicción
+        requestAnimationFrame(loop);
     } catch (error) {
         console.error("Error durante la predicción:", error);
-
-        // Mostrar mensaje de error en la página
-        const output = document.getElementById("output");
-        if (output) {
-            output.innerHTML = `<p style="color: red;">Error durante la predicción: ${error.message}</p>`;
-        }
     }
 }
 
-// Iniciar la aplicación
+
 init();
 
