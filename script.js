@@ -1,4 +1,4 @@
-model = await tmImage.load(`${"https://matildenayby.github.io/Contenedores/";}model.json`, `${"https://matildenayby.github.io/Contenedores/";}metadata.json`)
+const URL = "https://matildenayby.github.io/Contenedores/";
 let model, webcam;
 
 async function init() {
@@ -10,10 +10,3 @@ async function init() {
     predict();
 }
 
-async function predict() {
-    const prediction = await model.predict(webcam.canvas);
-    document.getElementById("output").innerText = JSON.stringify(prediction);
-    requestAnimationFrame(predict);
-}
-
-init();
