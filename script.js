@@ -1,7 +1,5 @@
 const URL = "https://matildenayby.github.io/Contenedores/";
 
-let model, webcam;
-
 async function init() {
     try {
         // Cargar el modelo
