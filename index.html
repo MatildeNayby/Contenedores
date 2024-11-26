@@ -28,7 +28,6 @@
             margin: 20px auto;
             width: 400px; /* Ajusta el ancho */
             height: 300px; /* Ajusta el alto */
-            border: 2px solid #000;
             border-radius: 10px;
             background-color: #fff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -37,6 +36,13 @@
         h1 {
             color: #333;
             margin-top: 20px;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
         }
 
         #output {
@@ -48,27 +54,11 @@
             border-radius: 8px;
             display: inline-block;
         }
-
-        canvas {
-            border: 2px solid red; /* Hace el canvas más visible */
-            border-radius: 8px;
-        }
-
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border: 2px solid red;
-            border-radius: 8px;
-        }
     </style>
 </head>
 <body>
     <h1>Teachable Machine App</h1>
-    <div id="webcam-container">
-        <!-- El feed del video se mostrará aquí -->
-        <video id="webcam" autoplay playsinline></video>
-    </div>
+    <div id="webcam-container"></div> <!-- Aquí solo se mostrará el feed de la cámara -->
     <div id="output"></div>
 
     <script src="script.js" defer></script>
