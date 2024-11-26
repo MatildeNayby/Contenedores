@@ -5,6 +5,7 @@ let model, webcam;
 async function init() {
     // Cargar el modelo
     model = await tmImage.load(`${URL}model.json`, `${URL}metadata.json`);
+    console.log("Modelo cargado correctamente");
 
     // Configurar y mostrar la cámara
     webcam = new tmImage.Webcam(200, 200, true); // Ancho, alto, cámara frontal
@@ -22,4 +23,5 @@ async function predict() {
     requestAnimationFrame(predict);
 }
 
+// Iniciar la aplicación
 init();
