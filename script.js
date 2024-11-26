@@ -1,30 +1,35 @@
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image"></script>
-
 const URL = "https://matildenayby.github.io/Contenedores/";
 
 let model, webcam;
 
 async function init() {
-    // Cargar el modelo
-    model = await tmImage.load(`${URL}model.json`, `${URL}metadata.json`);
-    console.log("Modelo cargado correctamente");
+    try {
+        // Cargar el modelo
+        model = await tmImage.load(`${URL}model.json`, `${URL}metadata.json`);
+        console.log("Modelo cargado correctamente");
 
-    // Configurar y mostrar la cámara
-    webcam = new tmImage.Webcam(200, 200, true); // Ancho, alto, cámara frontal
-    await webcam.setup();
-    await webcam.play();
-    document.getElementById("webcam").appendChild(webcam.canvas);
+        // Configurar la cámara
+        webcam = new tmImage.Webcam(200, 200, true); // Ancho, alto, cámara frontal
+        await webcam.setup();
+        await webcam.play();
+        document.getElementById("webcam").appendChild(webcam.canvas);
 
-    // Iniciar predicciones
-    predict();
+        // Iniciar predicciones
+        predict();
+    } catch (error) {
+        console.error("Error durante la inicialización:", error);
+    }
 }
 
 async function predict() {
-    const prediction = await model.predict(webcam.canvas);
-    console.log(prediction); // Ver resultados en la consola
-    requestAnimationFrame(predict);
+    try {
+        const prediction = await model.predict(webcam.canvas);
+        console.log(prediction);
+        requestAnimationFrame(predict);
+    } catch (error) {
+        console.error("Error durante la predicción:", error);
+    }
 }
 
-// Iniciar la aplicación
 init();
+
