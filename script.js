@@ -1,3 +1,6 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image"></script>
+
 const URL = "https://matildenayby.github.io/Contenedores/";
 
 let model, webcam;
